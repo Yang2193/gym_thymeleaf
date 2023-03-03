@@ -28,7 +28,7 @@ public class MemberInfoSelectController {
         MemberInfoDAO dao = new MemberInfoDAO();
         List<MemberInfoVO> memberinfo = dao.M_InfoSelect();
         System.out.println("특정회원정보 요청");
-        model.addAttribute();
+
         return "";
     }
 }
