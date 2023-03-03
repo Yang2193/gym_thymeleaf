@@ -23,12 +23,4 @@ public class MemberInfoSelectController {
         return "thymeleafGym/memberInfoSelectView";
     }
 
-    @GetMapping("/memberinfo")
-    public String specificMemberInfoSelect(Model model){
-        MemberInfoDAO dao = new MemberInfoDAO();
-        List<MemberInfoVO> memberinfo = dao.M_InfoSelect();
-        System.out.println("특정회원정보 요청");
-
-        return "";
-    }
 }
