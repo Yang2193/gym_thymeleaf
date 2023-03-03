@@ -66,7 +66,7 @@ public class MemberInfoDAO {
     }
 
     //특정 회원 조회 쿼리
-/*    public List<MemberInfoVO> M_SelectSomeone() {
+    public List<MemberInfoVO> M_SelectSomeone() {
         List<MemberInfoVO> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.print("조회하실 회원의 회원번호를 입력하세요. : ");
@@ -116,7 +116,7 @@ public class MemberInfoDAO {
             System.out.println("등록일 : " + e.getReg_Date());
             System.out.println("===============");
         }
-    }*/
+    }
 
     public void M_InfoInsert() {
         Scanner sc = new Scanner(System.in);

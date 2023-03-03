@@ -11,6 +11,8 @@ public class ProductVO {
         this.term = term;
     }
 
+    public ProductVO(){}
+
     public String getpName() {
         return pName;
     }

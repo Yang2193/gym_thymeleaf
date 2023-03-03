@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body><!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Member Information</title>
+</head>
+<body>
+<h2>회원 정보</h2>
+<table border="1" style="border-collapse: collapse;">
+  <thead style="background-color: white; color: black;">
+  <tr>
+    <th>회원 번호</th>
+    <th>회원 이름</th>
+    <th>이용 중인 상품</th>
+    <th>남은 PT횟수</th>
+    <th>만료일</th>
+    <th>성별</th>
+    <th>전화번호</th>
+    <th>라커번호</th>
+    <th>등록일</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="memberinfo : ${memberinfo}">
+    <td th:text="${memberinfo.mem_Id}"></td>
+    <td th:text="${memberinfo.mname}"></td>
+    <td th:text="${memberinfo.pname}"></td>
+    <td th:text="${memberinfo.ptRemain}"></td>
+    <td th:text="${memberinfo.due_Date}"></td>
+    <td th:text="${memberinfo.gender}"></td>
+    <td th:text="${memberinfo.phoneNum}"></td>
+    <td th:text="${memberinfo.lockNum}"></td>
+    <td th:text="${memberinfo.reg_Date}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
+</html>
