@@ -3,13 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>회원 정보 검색</title>
+    <title>회원 정보 수정</title>
 </head>
 <body>
-<h1>회원 정보 검색</h1>
-<form th:action="@{/gym/memberinfo/search/result}" method="get">
+<h1>수정하실 회원의 회원번호를 입력하세요.</h1>
+<form th:action="@{/gym/memberinfo/update}" method="get">
     <label>회원번호: <input type="text" name="mem_Id"></label>
-    <button type="submit">검색</button>
+    <button type="submit">수정</button>
 </form>
 <li style="list-style: none;"><button onclick="location.href='/gym/menu/memberinfo'">이전으로</button></li>
 </body>

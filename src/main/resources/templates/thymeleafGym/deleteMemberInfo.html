@@ -1,0 +1,15 @@
+<!-- 검색 폼 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 정보 삭제</title>
+</head>
+<body>
+<h1>삭제하실 회원의 회원번호를 입력하세요.</h1>
+<form th:action="@{/gym/memberinfo/delete/result}" method="get">
+  <label>회원번호: <input type="text" name="mem_Id"></label>
+  <button type="submit">삭제</button>
+</form>
+</body>
+</html>

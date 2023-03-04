@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 등록</title>
+</head>
+<body>
+<h1>회원 등록</h1>
+<form th:action="@{/gym/memberinfo/insert}" th:object="${memberinfo}" method="post">
+  <div>
+    <label for="mem_Id">회원번호:</label>
+    <input type="text" id="mem_Id" th:field="*{mem_Id}" />
+  </div>
+  <div>
+    <label for="mname">회원성함:</label>
+    <input type="text" id="mname" th:field="*{mname}" />
+  </div>
+  <div>
+    <label for="pname">이용하시는 상품:</label>
+    <input type="text" id="pname" th:field="*{pname}" />
+  </div>
+  <div>
+    <label for="ptRemain">PT횟수 설정:</label>
+    <input type="text" id="ptRemain" th:field="*{ptRemain}" />
+  </div>
+  <div>
+    <label for="term">기간 설정:</label>
+    <input type="text" id="term" th:field="*{term}" />
+  </div>
+  <div>
+    <label for="gender">성별:</label>
+    <input type="text" id="gender" th:field="*{gender}" />
+  </div>
+  <div>
+    <label for="phoneNum">전화번호:</label>
+    <input type="text" id="phoneNum" th:field="*{phoneNum}" />
+  </div>
+  <div>
+    <label for="lockNum">라커설정:</label>
+    <input type="text" id="lockNum" th:field="*{lockNum}" />
+  </div>
+  <div>
+    <label for="reg_Date">등록일 :</label>
+    <input type="date" id="reg_Date" th:field="*{reg_Date}" />
+  </div>
+  <div>
+    <button type="submit">등록</button>
+  </div>
+</form>
+
+
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/memberinfo'">이전으로</button></li>
+</body>
+</html>

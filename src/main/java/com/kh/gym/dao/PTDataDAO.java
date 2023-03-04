@@ -36,7 +36,17 @@ public class PTDataDAO {
                 String lNum = rSet.getString("LOCKER");
                 Date rDate = rSet.getDate("REG_DATE");
 
-                MemberInfoVO vo = new MemberInfoVO(id, mName, pName, ptRemain, dDate, gender, pNum, lNum, rDate);
+                MemberInfoVO vo = new MemberInfoVO();
+                vo.setMem_Id(id);
+                vo.setMname(mName);
+                vo.setPname(pName);
+                vo.setPtRemain(ptRemain);
+                vo.setDue_Date(dDate);
+                vo.setGender(gender);
+                vo.setPhoneNum(pNum);
+                vo.setLockNum(lNum);
+                vo.setReg_Date(rDate);
+
                 list.add(vo);
             }
             Common.close(rSet); // 연결과 역순으로 해제

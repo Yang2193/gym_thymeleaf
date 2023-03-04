@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원정보 수정</title>
+</head>
+<body>
+<h1>회원정보 수정</h1>
+<form method="post" th:action="@{/gym/memberinfo/update_member}" th:object="${member}">
+  <input type="hidden" th:field="*{mem_Id}">
+  <label>회원 성함:</label>
+  <input type="text" th:field="*{mname}"><br>
+  <label>이용하시는 상품:</label>
+  <input type="text" th:field="*{pname}"><br>
+  <label>PT 횟수 설정:</label>
+  <input type="text" th:field="*{ptRemain}"><br>
+  <label>만료일 설정:</label>
+  <input type="date" th:field="*{due_Date}"><br>
+  <label>성별:</label>
+  <input type="text" th:field="*{gender}"><br>
+  <label>전화번호:</label>
+  <input type="text" th:field="*{phoneNum}"><br>
+  <label>라커 번호:</label>
+  <input type="text" th:field="*{lockNum}"><br>
+  <input type="submit" value="Modify">
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/memberinfo'">이전으로</button></li>
+</body>
+</html>
