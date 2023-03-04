@@ -7,8 +7,8 @@ import java.sql.Statement;
 
 public class Common {
     final static String ORACLE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    final static String ORACLE_ID = "SAMPLEH"; // SCOTT 계정 사용시 바꿔줘야 합니다.
-    final static String ORACLE_PWD = "1234";
+    final static String ORACLE_ID = "SCOTT"; // SCOTT 계정 사용시 바꿔줘야 합니다.
+    final static String ORACLE_PWD = "TIGER";
     final static String ORACLE_DRV = "oracle.jdbc.driver.OracleDriver";
     public static Connection getConnection() {
         Connection conn = null;

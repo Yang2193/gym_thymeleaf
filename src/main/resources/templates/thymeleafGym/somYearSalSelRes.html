@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+  <title>년 매출 조회</title>
+</head>
+<body>
+<h2>년 매출 조회</h2>
+<table border="1" style="border-collapse: collapse;">
+  <thead style="background-color: royalblue; color: white;">
+  <tr>
+    <th>주문 번호</th>
+    <th>회원 번호</th>
+    <th>회원 이름</th>
+    <th>상품 이름</th>
+    <th>매출</th>
+    <th>구매 날짜</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="sales : ${salesList}">
+    <td th:text="${sales.order_No}"></td>
+    <td th:text="${sales.mem_ID}"></td>
+    <td th:text="${sales.mName}"></td>
+    <td th:text="${sales.purchase}"></td>
+    <td th:text="${sales.sales}"></td>
+    <td th:text="${sales.p_DateStr}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
