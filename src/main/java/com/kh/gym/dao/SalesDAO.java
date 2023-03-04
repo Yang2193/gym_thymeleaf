@@ -144,7 +144,7 @@ public class SalesDAO {
         Common.close(conn);
     }
 
-    public List<SalesVO> somDaySalSel(SalesVO salesVO) {
+    public List<SalesVO> oneDaySalSel(SalesVO salesVO) {
         List<SalesVO> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
@@ -178,7 +178,7 @@ public class SalesDAO {
         return list;
     }
 
-    public List<SalesVO> somMonthSalSel(SalesVO salesVO) {
+    public List<SalesVO> oneMonthSalSel(SalesVO salesVO) {
         List<SalesVO> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
@@ -212,7 +212,7 @@ public class SalesDAO {
         return list;
     }
 
-        public List<SalesVO> somYearSalSel(SalesVO salesVO) {
+        public List<SalesVO> oneYearSalSel(SalesVO salesVO) {
         List<SalesVO> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY') = ? ORDER BY ORDER_NO";

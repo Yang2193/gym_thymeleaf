@@ -5,11 +5,11 @@
 </head>
 <body>
 <h1>매출 조회</h1>
-<form th:action="@{/select/resSomMonthSalSel}" th:object="${salesVO}" method="post">
+<form th:action="@{/select/resOneDaySalSel}" th:object="${salesVO}" method="post">
 
     <div>
-        <label for="p_DateStr">원하는 날짜를 입력 하세요 :</label>
-        <input type="text" id="p_DateStr" th:field="*{p_DateStr}" />
+    <label for="p_DateStr">원하는 날짜를 입력 하세요 :</label>
+    <input type="text" id="p_DateStr" th:field="*{p_DateStr}" />
     </div>
     <div>
         <button type="submit">Save</button>

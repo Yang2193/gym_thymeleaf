@@ -35,43 +35,43 @@ public class SalesSelectController {
         model.addAttribute("annualSalSel", annualSalSel);
         return "thymeleafGym/annualSalSelView";
     }
-    @GetMapping("/somDaySalSel")
-    public String SomDaySalSel(Model model) {
+    @GetMapping("/oneDaySalSel")
+    public String OneDaySalSel(Model model) {
         model.addAttribute("salesVO", new SalesVO());
-        return "thymeleafGym/somDaySalSelView";
+        return "thymeleafGym/oneDaySalSelView";
     }
 
-    @PostMapping("/resSomDaySalSel")
-    public String ResSomDaySalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
+    @PostMapping("/resOneDaySalSel")
+    public String ResOneDaySalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
         SalesDAO dao = new SalesDAO();
-        List<SalesVO> list = dao.somDaySalSel(salesVO);
+        List<SalesVO> list = dao.oneDaySalSel(salesVO);
         model.addAttribute("salesList", list);
-        return "thymeleafGym/somDaySalSelRes";
+        return "thymeleafGym/oneDaySalSelRes";
     }
-    @GetMapping("/somMonthSalSel")
-    public String SomMonthSalSel(Model model) {
+    @GetMapping("/oneMonthSalSel")
+    public String OneMonthSalSel(Model model) {
         model.addAttribute("salesVO", new SalesVO());
-        return "thymeleafGym/somMonthSalSelView";
+        return "thymeleafGym/oneMonthSalSelView";
     }
 
-    @PostMapping("/resSomMonthSalSel")
-    public String ResSomMonthSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
+    @PostMapping("/resOneMonthSalSel")
+    public String ResOneMonthSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
         SalesDAO dao = new SalesDAO();
-        List<SalesVO> list = dao.somMonthSalSel(salesVO);
+        List<SalesVO> list = dao.oneMonthSalSel(salesVO);
         model.addAttribute("salesList", list);
-        return "thymeleafGym/somMonthSalSelRes";
+        return "thymeleafGym/oneMonthSalSelRes";
     }
-    @GetMapping("/somYearSalSel")
-    public String SomYearSalSel(Model model) {
+    @GetMapping("/oneYearSalSel")
+    public String OneYearSalSel(Model model) {
         model.addAttribute("salesVO", new SalesVO());
-        return "thymeleafGym/somYearSalSelView";
+        return "thymeleafGym/oneYearSalSelView";
     }
 
-    @PostMapping("/resSomYearSalSel")
-    public String ResSomYearSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
+    @PostMapping("/resOneYearSalSel")
+    public String ResOneYearSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
         SalesDAO dao = new SalesDAO();
-        List<SalesVO> list = dao.somYearSalSel(salesVO);
+        List<SalesVO> list = dao.oneYearSalSel(salesVO);
         model.addAttribute("salesList", list);
-        return "thymeleafGym/somYearSalSelRes";
+        return "thymeleafGym/oneYearSalSelRes";
     }
 }
