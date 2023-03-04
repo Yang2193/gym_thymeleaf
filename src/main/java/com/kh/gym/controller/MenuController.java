@@ -27,4 +27,7 @@ public class MenuController {
     @GetMapping("/menu/locker")
     public String lockerMenu(){return "thymeleafGym/lockerMenu";}
 
+    @GetMapping("/menu/sales")
+    public String salesMenu(){return "thymeleafGym/salesMenu";}
+
 }

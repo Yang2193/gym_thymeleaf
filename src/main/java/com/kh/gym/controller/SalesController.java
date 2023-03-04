@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-
 @Controller
-@RequestMapping("/select")
-public class SalesSelectController {
+@RequestMapping("/gym/salesInfo")
+public class SalesController {
     @GetMapping("/dailySalSel")
     public String dailySalSel(Model model) {
         SalesDAO dao = new SalesDAO();
@@ -42,7 +41,7 @@ public class SalesSelectController {
     }
 
     @PostMapping("/resOneDaySalSel")
-    public String ResOneDaySalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
+    public String ResOneDaySalSel(@ModelAttribute("salesVO") SalesVO salesVO, Model model){
         SalesDAO dao = new SalesDAO();
         List<SalesVO> list = dao.oneDaySalSel(salesVO);
         model.addAttribute("salesList", list);
@@ -73,5 +72,43 @@ public class SalesSelectController {
         List<SalesVO> list = dao.oneYearSalSel(salesVO);
         model.addAttribute("salesList", list);
         return "thymeleafGym/oneYearSalSelRes";
+    }
+
+    @GetMapping("/insert")
+    public String insertSalesFrom(Model model) {
+        model.addAttribute("sales", new SalesVO());
+        return "thymeleafGym/salesInsertView";
+    }
+
+    @PostMapping("/insert")
+    public String saveSales(@ModelAttribute("sales") SalesVO salesVO) {
+        SalesDAO dao = new SalesDAO();
+        dao.salesInsert(salesVO);
+        return "thymeleafGym/salesInsertRes";
+    }
+    @GetMapping("/update")
+    public String updateSalesFrom(Model model) {
+        model.addAttribute("sales", new SalesVO());
+        return "thymeleafGym/salesUpdateView";
+    }
+
+    @PostMapping("/update")
+    public String updateSales(@ModelAttribute("sales") SalesVO salesVO) {
+        SalesDAO dao = new SalesDAO();
+        dao.salesUpdate(salesVO);
+        return "thymeleafGym/salesUpdateRes";
+    }
+
+    @GetMapping("/delete")
+    public String deleteSalesFrom(Model model) {
+        model.addAttribute("sales", new SalesVO());
+        return "thymeleafGym/salesDeleteView";
+    }
+
+    @PostMapping("/delete")
+    public String deleteSales(@ModelAttribute("sales") SalesVO salesVO) {
+        SalesDAO dao = new SalesDAO();
+        dao.salesDelete(salesVO);
+        return "thymeleafGym/salesDeleteRes";
     }
 }
