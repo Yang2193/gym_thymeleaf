@@ -1,7 +1,11 @@
 package com.kh.gym.vo;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Date;
+@Getter
+@Setter
 public class LockerVO {
     String lockNum;
     Date dDate;

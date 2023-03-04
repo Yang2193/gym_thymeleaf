@@ -57,7 +57,6 @@ public class MemberInfoController {
     }
     @PostMapping("/insert")
     public String saveMemberInfo(@ModelAttribute("memberinfo") MemberInfoVO memberinfo) {
-        MemberInfoDAO dao = new MemberInfoDAO();
         dao.M_InfoInsert(memberinfo);
         System.out.println("회원등록 성공");
         return "redirect:/gym/memberinfo/" + memberinfo.getMem_Id();
@@ -81,8 +80,9 @@ public class MemberInfoController {
     // 삭제 실행
     @GetMapping("/delete/result")
     public String deleteMemberInfo2(@RequestParam("mem_Id") int mem_Id, Model model) {
-        List<MemberInfoVO> memberinfo = dao.M_SelectSomeone(mem_Id);
         dao.m_InfoDelete(mem_Id);
+        List<MemberInfoVO> memberinfo = dao.M_InfoSelect();
+        model.addAttribute("memberinfo", memberinfo);
         return "thymeleafGym/memberInfoSelectView";
     }
 

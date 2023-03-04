@@ -1,0 +1,16 @@
+<!-- 검색 폼 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>상품 정보 삭제</title>
+</head>
+<body>
+<h1>삭제할 상품명을 입력하세요.</h1>
+<form th:action="@{/gym/product/delete/result}" method="get">
+  <label>상품명: <input type="text" name="pName"></label>
+  <button type="submit">삭제</button>
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/product'">이전으로</button></li>
+</body>
+</html>

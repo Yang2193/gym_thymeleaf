@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>라커 등록/수정</title>
+</head>
+<body>
+<h1>라커 등록/수정</h1>
+<form method="get" action="/gym/locker/update_locker">
+  <label for="lockNum">등록/수정할 라커번호:</label>
+  <input type="text" id="lockNum" name="lockNum"><br><br>
+  <label for="term">기간 설정:</label>
+  <input type="text" id="term" name="term"><br><br>
+  <label for="id">회원번호:</label>
+  <input type="text" id="id" name="id"><br><br>
+  <input type="submit" value="등록/수정">
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/locker'">이전으로</button></li>
+</body>
+</html>

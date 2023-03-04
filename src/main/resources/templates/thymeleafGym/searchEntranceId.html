@@ -1,0 +1,16 @@
+<!-- 검색 폼 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 출석 조회(회원번호)</title>
+</head>
+<body>
+<h1>회원 출석 조회(회원번호)</h1>
+<form th:action="@{/gym/entrance/search/idRst}" method="get">
+  <label>회원번호: <input type="text" name="id"></label>
+  <button type="submit">검색</button>
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/entrance'">이전으로</button></li>
+</body>
+</html>

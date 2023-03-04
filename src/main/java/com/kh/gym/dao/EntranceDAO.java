@@ -3,12 +3,13 @@ package com.kh.gym.dao;
 import com.kh.gym.util.Common;
 import com.kh.gym.vo.EntranceVO;
 import com.kh.gym.vo.MemberEntranceVO;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+@Repository
 public class EntranceDAO {
 
     Connection conn = null; // 자바와 오라클에 대한 연결 설정
@@ -47,24 +48,10 @@ public class EntranceDAO {
         }
         return list;
     }
-    public void showToday(List<EntranceVO> list){
-        System.out.println("입장순서 회원번호  회원성함 입장시간");
 
-        for(EntranceVO e : list){
-            System.out.print("   " + e.getRownum());
-            System.out.print("    " +e.getId());
-            System.out.print("    " +e.getName());
-            System.out.print("    " +e.getDateStr());
-            System.out.println();
-        }
-
-    }
-
-    public List<EntranceVO> showDayList(){
+    public List<EntranceVO> showDayList(String dDate){
         List<EntranceVO> list = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        System.out.print("조회하실 날짜를 입력해주세요.(년-월-일) : ");
-        String dDate = sc.next();
+
         String sql = "SELECT ROWNUM, MEM_ID, MNAME, TO_CHAR(E_DATE, 'HH24:MI') AS E_DATE FROM (SELECT ED.MEM_ID, MNAME, E_DATE FROM ENTRANCE_DATA ED JOIN MEMBERINFO M \n" +
                 "ON ED.MEM_ID = M.MEM_ID WHERE TO_CHAR(E_DATE, 'YYYY-MM-DD') = ?\n" +
                 "ORDER BY E_DATE)";
@@ -96,24 +83,11 @@ public class EntranceDAO {
         return list;
     }
 
-    public void showDay(List<EntranceVO> list){
-        System.out.println("입장순서 회원번호  회원성함  입장시간");
 
-        for(EntranceVO e : list){
-            System.out.print("   " + e.getRownum());
-            System.out.print("    " +e.getId());
-            System.out.print("    " +e.getName());
-            System.out.print("    " +e.getDateStr());
-            System.out.println();
-        }
 
-    }
-
-    public List<EntranceVO> showMemberAttendanceList(){
+    public List<EntranceVO> showMemberAttendanceList(int num){
         List<EntranceVO> list = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("조회하실 회원의 회원번호를 입력해주세요.");
-        int num = sc.nextInt();
+
         String sql = "SELECT ROWNUM, MEM_ID, MNAME, E_DATE FROM (SELECT ED.MEM_ID, MNAME, E_DATE FROM ENTRANCE_DATA ED JOIN MEMBERINFO M \n" +
                 "ON ED.MEM_ID = M.MEM_ID WHERE ED.MEM_ID = ?\n" +
                 "ORDER BY E_DATE)";
@@ -145,25 +119,14 @@ public class EntranceDAO {
         return list;
     }
 
-    public void showMemberAttendance(List<EntranceVO> list){
-        System.out.println("입장횟수 회원번호  회원성함    입장날짜");
 
-        for(EntranceVO e : list){
-            System.out.print("   " + e.getRownum());
-            System.out.print("    " +e.getId());
-            System.out.print("    " +e.getName());
-            System.out.print("   " +e.getDate());
-            System.out.println();
-        }
-    }
 
-    public void entranceInsert(String m) {
-        int num = Integer.parseInt(m);
+    public void entranceInsert(int mem_id) {
         String sql = "INSERT INTO ENTRANCE_DATA VALUES(?, SYSDATE)";
         try {
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, num);
+            pStmt.setInt(1, mem_id);
             int ret = pStmt.executeUpdate();
         } catch(Exception e){
 
@@ -171,9 +134,9 @@ public class EntranceDAO {
         Common.close(pStmt);
         Common.close(conn);
     }
-    public List<MemberEntranceVO> enterMember(String m){
+    public List<MemberEntranceVO> enterMember(int num){
         List<MemberEntranceVO> list = new ArrayList<>();
-        int num = Integer.parseInt(m);
+
         String sql = "SELECT MEM_ID, MNAME, PNAME, DUE_DATE FROM MEMBERINFO WHERE MEM_ID = ?"
                 +"AND DUE_DATE - SYSDATE > 0";
 
@@ -181,13 +144,11 @@ public class EntranceDAO {
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
             pStmt.setInt(1, num);
-            int ret = pStmt.executeUpdate();
-            if(ret == 0)  {System.out.println("등록되지 않은 회원번호거나 기간이 만료된 회원입니다.");
-            rs = pStmt.executeQuery();}
-            else {
-                entranceInsert(m);
+            rs = pStmt.executeQuery();
+
+                entranceInsert(num);
                 while (rs.next()) {
-                    int id = rs.getInt("MEM_ID");
+                        int id = rs.getInt("MEM_ID");
                     String name = rs.getString("MNAME");
                     String pName = rs.getString("PNAME");
                     Date date = rs.getDate("DUE_DATE");
@@ -203,7 +164,7 @@ public class EntranceDAO {
 
                     System.out.println("입장 완료");
 
-                }
+
             }
             Common.close(rs);
             Common.close(pStmt);

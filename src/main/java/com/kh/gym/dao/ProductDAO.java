@@ -2,6 +2,7 @@ package com.kh.gym.dao;
 
 import com.kh.gym.util.Common;
 import com.kh.gym.vo.ProductVO;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+@Repository
 public class ProductDAO {
     Connection conn = null; // 자바와 오라클에 대한 연결 설정
     Statement stmt = null;  // SQL 문을 수행하기 위한 객체
@@ -41,36 +43,18 @@ public class ProductDAO {
         return list;
     }
 
-    public void productView(List<ProductVO> list){
-        System.out.println("상품명       가격      기간");
-        for(ProductVO e : list){
-            System.out.print(" " + e.getpName());
-            if(e.getpName().length() > 3) System.out.print("   " + e.getPrice());
-            else System.out.print("         " + e.getPrice());
-            System.out.print("   " + e.getTerm());
-            System.out.println();
-        }
-    }
 
-    public void productInsert(){
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("===== 상품 추가 =====");
-            System.out.print("상품 이름 : ");
-            String pName = sc.nextLine();
-            System.out.print("가격 설정 : ");
-            int price = sc.nextInt();
-            System.out.print("기간 설정 : ");
-            int term = sc.nextInt();
+    public void productInsert(ProductVO vo){
+
 
         String sql = "INSERT INTO PRODUCT VALUES(?,?,?)";
 
         try{
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, pName);
-            pStmt.setInt(2, price);
-            pStmt.setInt(3, term);
+            pStmt.setString(1, vo.getpName());
+            pStmt.setInt(2, vo.getPrice());
+            pStmt.setInt(3, vo.getTerm());
             int ret = pStmt.executeUpdate();
             if(ret == 0) System.out.println("잘못 된 정보를 입력하셨습니다.");
             else System.out.print("상품 추가 완료");
@@ -82,46 +66,13 @@ public class ProductDAO {
         Common.close(pStmt);
         Common.close(conn);
 
-        } catch(InputMismatchException e){
-            System.out.println("잘못된 값을 입력하셨습니다.");
         }
-    }
 
-    public void productUpdate(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("수정할 상품명을 입력하세요 : ");
-        String pName = sc.nextLine();
-        System.out.print("상품명 수정 : ");
-        String newPName = sc.nextLine();
-        System.out.print("가격 수정 : ");
-        int price = sc.nextInt();
-        System.out.print("기간 수정 : ");
-        int term = sc.nextInt();
 
-        String sql = "UPDATE PRODUCT SET PNAME = ?, PRICE = ?, TERM = ? WHERE PNAME = ?";
 
-        try{
-            conn = Common.getConnection();
-            pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, newPName);
-            pStmt.setInt(2, price);
-            pStmt.setInt(3, term);
-            pStmt.setString(4, pName);
-            int ret = pStmt.executeUpdate();
-            if(ret == 0) System.out.println("존재하지 않는 상품이거나 값을 잘못 입력하셨습니다.");
-            else System.out.println("상품 수정 완료");
-        }catch(Exception e){
-            System.out.println("존재하지 않는 상품이거나 값을 잘못 입력하셨습니다.");
-        }
-        Common.close(pStmt);
-        Common.close(conn);
 
-    }
+    public void productDelete(String pName){
 
-    public void productDelete(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("삭제할 상품명을 입력하세요. :  ");
-        String pName = sc.nextLine();
 
         String sql = "DELETE FROM PRODUCT WHERE PNAME = ?";
 

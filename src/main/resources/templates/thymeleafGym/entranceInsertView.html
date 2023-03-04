@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Member Information</title>
+</head>
+<body>
+<h2>회원 정보</h2>
+<table border="1" style="border-collapse: collapse;">
+  <thead style="background-color: white; color: black;">
+  <tr>
+    <th>회원 번호</th>
+    <th>회원 성함</th>
+    <th>이용 중이신 상품</th>
+    <th>만료 날짜</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="entranceMemberList : ${entranceMemberList}">
+    <td th:text="${entranceMemberList.id}"></td>
+    <td th:text="${entranceMemberList.name}"></td>
+    <td th:text="${entranceMemberList.pName}"></td>
+    <td th:text="${entranceMemberList.date}"></td>
+
+  </tr>
+  </tbody>
+</table>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/entrance/insert/form'">이전으로</button></li>
+</body>
+</html>

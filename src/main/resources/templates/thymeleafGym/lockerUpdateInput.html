@@ -1,0 +1,16 @@
+<!-- 검색 폼 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>라커 등록/수정</title>
+</head>
+<body>
+<h1>등록/수정할 라커번호를 입력해주세요.</h1>
+<form th:action="@{/gym/locker/update_locker}" method="get">
+    <label>라커번호: <input type="text" name="lockNum"></label>
+    <button type="submit">등록/수정</button>
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/locker'">이전으로</button></li>
+</body>
+</html>

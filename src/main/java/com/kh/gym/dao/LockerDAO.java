@@ -2,12 +2,13 @@ package com.kh.gym.dao;
 
 import com.kh.gym.util.Common;
 import com.kh.gym.vo.LockerVO;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+@Repository
 public class LockerDAO {
     Connection conn = null; // 자바와 오라클에 대한 연결 설정
     Statement stmt = null;  // SQL 문을 수행하기 위한 객체
@@ -49,20 +50,6 @@ public class LockerDAO {
     return list;
     }
 
-    public void entireLocker(List<LockerVO> list){
-        System.out.println("라커번호         만료일         회원번호         회원성함");
-        for(LockerVO e : list) {
-            System.out.print("  " + e.getLockNum());
-            if(e.getdDate() == null) System.out.print("              현재 이용자 없음");
-            else {
-                System.out.print("         " + e.getdDate());
-                System.out.print("         " + e.getId());
-                System.out.print("         " + e.getName());
-            }
-            System.out.println();
-
-        }
-    }
 
     public List<LockerVO> occupiedLockerList(){
         List<LockerVO> list = new ArrayList<>();
@@ -97,16 +84,6 @@ public class LockerDAO {
         return list;
     }
 
-    public void occupiedLocker(List<LockerVO> list){
-        System.out.println("라커번호         만료일         회원번호         회원성함");
-        for(LockerVO e : list) {
-            System.out.print("  " + e.getLockNum());
-            System.out.print("         " + e.getdDate());
-            System.out.print("         " + e.getId());
-            System.out.print("         " + e.getName());
-            System.out.println();
-        }
-    }
 
     public List<LockerVO> specificLockerList(){
         List<LockerVO> list = new ArrayList<>();
@@ -146,42 +123,18 @@ public class LockerDAO {
         return list;
     }
 
-    public void specificLocker(List<LockerVO> list){
-        try {
-        System.out.println("라커번호         만료일         회원번호         회원성함");
 
-            for (LockerVO e : list) {
-                System.out.print("  " + e.getLockNum());
-                System.out.print("         " + e.getdDate());
-                System.out.print("         " + e.getId());
-                System.out.print("         " + e.getName());
-                System.out.println();
-            }
-        }catch(Exception e){
-            System.out.println("존재하지 않는 라커번호거나 잘못된 값을 입력하셨습니다.");
-        }
-    }
 
-    public void updateLockerProgram(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("등록/수정할 라커 번호 입력 : ");
-        String num = sc.next();
-        updateMILocker(num);
-        updateLocker(num);
-    }
 
-    public void updateLocker(String num){
-        Scanner sc = new Scanner(System.in);
+    public void updateLocker(String lNum, int term){
 
-        System.out.print("이용하실 기간 입력 : ");
-        int term = sc.nextInt();
         String sql = "UPDATE LOCKER SET DUE_DATE = SYSDATE + ? WHERE LOCKNUM = ?";
 
         try{
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
             pStmt.setInt(1, term);
-            pStmt.setString(2, num);
+            pStmt.setString(2, lNum);
             int ret = pStmt.executeUpdate();
             if(ret == 0) System.out.println("그 라커번호는 존재하지 않습니다.");
             else System.out.println("등록/수정 완료");
@@ -194,17 +147,15 @@ public class LockerDAO {
         Common.close(conn);
     }
 
-    public void updateMILocker(String num){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("라커를 이용하시는 회원님의 회원번호를 입력해주세요.");
-        int id = sc.nextInt();
+    public void updateMILocker(String lNum, int id){
+
 
         String sql = "UPDATE MEMBERINFO SET LOCKER = ? WHERE MEM_ID = ?";
 
         try{
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, num);
+            pStmt.setString(1, lNum);
             pStmt.setInt(2, id);
             pStmt.executeUpdate();
         }catch(SQLException e){
@@ -223,7 +174,7 @@ public class LockerDAO {
         initLocker(num);
     }
 
-    public void initLocker(String num){ // 다음엔 걍 라커테이블에 mem_id 넣고 회원정보에 라커테이블의 번호를 붙이는게 낫겠음
+    public void initLocker(String num){
         String sql = "UPDATE LOCKER SET DUE_DATE = '' WHERE LOCKNUM = ?";
 
         try{
@@ -248,12 +199,52 @@ public class LockerDAO {
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, num);
-            pStmt.executeUpdate();
+            int ret = pStmt.executeUpdate();
+            if(ret == 0) System.out.println("그 라커번호는 존재하지 않습니다.");
+            else System.out.println("라커 초기화 완료.");
         } catch(Exception e){
             e.printStackTrace();
         }
     }
 
+
+
+    public void updateLocker(String lockNum, int id, int term) {
+
+        String sql1 = "UPDATE MEMBERINFO SET LOCKER = ? WHERE MEM_ID = ?";
+        String sql2 = "UPDATE LOCKER SET DUE_DATE = SYSDATE + ? WHERE LOCKNUM = ?";
+
+        try {
+            conn = Common.getConnection();
+            conn.setAutoCommit(false); // 트랜잭션 시작
+
+            // MEMBERINFO 테이블 업데이트
+            pStmt = conn.prepareStatement(sql1);
+            pStmt.setString(1, lockNum);
+            pStmt.setInt(2, id);
+            pStmt.executeUpdate();
+
+            // LOCKER 테이블 업데이트
+            pStmt = conn.prepareStatement(sql2);
+            pStmt.setInt(1, term);
+            pStmt.setString(2, lockNum);
+            pStmt.executeUpdate();
+
+            conn.commit(); // 트랜잭션 커밋
+            System.out.println("등록/수정 완료");
+        } catch (SQLException e) {
+            try {
+                conn.rollback(); // 트랜잭션 롤백
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("오류 발생");
+            e.printStackTrace();
+        } finally {
+            Common.close(pStmt);
+            Common.close(conn);
+        }
+    }
 
 
 }
