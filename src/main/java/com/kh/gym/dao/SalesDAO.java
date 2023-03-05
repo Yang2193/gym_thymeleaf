@@ -18,11 +18,11 @@ public class SalesDAO {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT SUM(SALES), TO_CHAR(P_DATE,'YYYY/MM/DD') FROM SALES_STATEMENT GROUP BY TO_CHAR(P_DATE,'YYYY/MM/DD') ORDER BY TO_CHAR(P_DATE,'YYYY/MM/DD')";
+            String sql = "SELECT SUM(SALES), TO_CHAR(P_DATE,'YYYY-MM-DD') FROM SALES_STATEMENT GROUP BY TO_CHAR(P_DATE,'YYYY-MM-DD') ORDER BY TO_CHAR(P_DATE,'YYYY-MM-DD')";
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                String pDate = rs.getString("TO_CHAR(P_DATE,'YYYY/MM/DD')");
+                String pDate = rs.getString("TO_CHAR(P_DATE,'YYYY-MM-DD')");
                 int sumSales = rs.getInt("SUM(SALES)");
                 SalesVO vo = new SalesVO();
                 vo.setP_DateStr(pDate);
@@ -43,11 +43,11 @@ public class SalesDAO {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT SUM(SALES), TO_CHAR(P_DATE,'YYYY/MM') FROM SALES_STATEMENT GROUP BY TO_CHAR(P_DATE,'YYYY/MM') ORDER BY TO_CHAR(P_DATE,'YYYY/MM')";
+            String sql = "SELECT SUM(SALES), TO_CHAR(P_DATE,'YYYY-MM') FROM SALES_STATEMENT GROUP BY TO_CHAR(P_DATE,'YYYY-MM') ORDER BY TO_CHAR(P_DATE,'YYYY-MM')";
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                String pDateStr = rs.getString("TO_CHAR(P_DATE,'YYYY/MM')");
+                String pDateStr = rs.getString("TO_CHAR(P_DATE,'YYYY-MM')");
                 int sumSales = rs.getInt("SUM(SALES)");
                 SalesVO vo = new SalesVO();
                 vo.setP_DateStr(pDateStr);
@@ -148,7 +148,7 @@ public class SalesDAO {
         List<SalesVO> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
-            String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY/MM/DD') = ? ORDER BY ORDER_NO";
+            String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY-MM-DD') = ? ORDER BY ORDER_NO";
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1,salesVO.getP_DateStr());
             rs = pStmt.executeQuery();
@@ -182,7 +182,7 @@ public class SalesDAO {
         List<SalesVO> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
-            String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY/MM') = ? ORDER BY ORDER_NO";
+            String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY-MM') = ? ORDER BY ORDER_NO";
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1,salesVO.getP_DateStr());
             rs = pStmt.executeQuery();
