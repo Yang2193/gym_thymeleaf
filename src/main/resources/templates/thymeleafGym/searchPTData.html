@@ -1,0 +1,16 @@
+<!-- 검색 폼 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 정보 검색</title>
+</head>
+<body>
+<h1>PT 회원 검색</h1>
+<form th:action="@{/gym/ptdata/search/result}" method="get">
+  <label>회원번호: <input type="text" name="mem_Id"></label>
+  <button type="submit">검색</button>
+</form>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/ptdata'">이전으로</button></li>
+</body>
+</html>

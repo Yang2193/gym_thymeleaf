@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Member Information</title>
+</head>
+<body>
+<h2>회원 정보</h2>
+<table border="1" style="border-collapse: collapse;">
+  <thead style="background-color: white; color: black;">
+  <tr>
+    <th>회원 번호</th>
+    <th>회원 이름</th>
+    <th>이용 중인 상품</th>
+    <th>남은 PT횟수</th>
+    <th>만료일</th>
+    <th>성별</th>
+    <th>전화번호</th>
+    <th>라커번호</th>
+    <th>등록일</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="pt_member : ${pt_member}">
+    <td th:text="${pt_member.mem_Id}"></td>
+    <td th:text="${pt_member.mname}"></td>
+    <td th:text="${pt_member.pname}"></td>
+    <td th:text="${pt_member.ptRemain}"></td>
+    <td th:text="${pt_member.due_Date}"></td>
+    <td th:text="${pt_member.gender}"></td>
+    <td th:text="${pt_member.phoneNum}"></td>
+    <td th:text="${pt_member.lockNum}"></td>
+    <td th:text="${pt_member.reg_Date}"></td>
+  </tr>
+  </tbody>
+</table>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/ptdata'">이전으로</button></li>
+</body>
+</html>
+</html>

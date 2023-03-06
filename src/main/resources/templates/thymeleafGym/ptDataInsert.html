@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PT 기록 삽입</title>
+</head>
+<body>
+private int mem_ID;
+private int trainer_ID;
+private String ptDate;
+<h1>PT 기록 삽입</h1>
+<form th:action="@{/gym/ptdata/insert}" th:object="${pt_data}" method="post">
+    <div>
+        <label for="memId">회원번호:</label>
+        <input type="text" id="memId" th:field="*{mem_ID}" />
+    </div>
+    <div>
+        <label for="trainerId">트레이너 번호:</label>
+        <input type="text" id="trainerId" th:field="*{trainer_ID}" />
+    </div>
+    <div>
+        <label for="ptDate">날짜:</label>
+        <input type="text" id="ptDate" th:field="*{ptDate}" />
+    </div>
+    <div>
+        <button type="submit">등록</button>
+    </div>
+</form>
+
+
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/ptdata'">이전으로</button></li>
+</body>
+</html>

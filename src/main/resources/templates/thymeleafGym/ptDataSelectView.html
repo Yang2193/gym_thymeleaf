@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Information</title>
+</head>
+<body>
+<h2>PT 기록</h2>
+<table border="1" style="border-collapse: collapse;">
+    <thead style="background-color: white; color: black;">
+    <tr>
+        <th>회원번호</th>
+        <th>회원이름</th>
+        <th>트레이너</th>
+        <th>날짜</th>
+        <th>남은 PT횟수</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pt_data : ${pt_data}">
+        <td th:text="${pt_data.MEM_ID"></td>
+        <td th:text="${pt_data.MNAME}"></td>
+        <td th:text="${pt_data.TRAINER_NAME}"></td>
+        <td th:text="${pt_data.PT_DATE}"></td>
+        <td th:text="${pt_data.PT_REMAIN}"></td>
+    </tr>
+    </tbody>
+</table>
+<li style="list-style: none;"><button onclick="location.href='/gym/menu/ptdata'">이전으로</button></li>
+</body>
+</html>
+</html>
