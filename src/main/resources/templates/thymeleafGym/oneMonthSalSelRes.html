@@ -6,7 +6,7 @@
 <body>
 <h2>월 매출 조회</h2>
 <table border="1" style="border-collapse: collapse;">
-    <thead style="background-color: royalblue; color: white;">
+    <thead style="background-color: white; color: black;">
     <tr>
         <th>주문 번호</th>
         <th>회원 번호</th>
@@ -17,17 +17,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="sales : ${salesList}">
-        <td th:text="${sales.order_No}"></td>
-        <td th:text="${sales.mem_ID}"></td>
-        <td th:text="${sales.mName}"></td>
-        <td th:text="${sales.purchase}"></td>
-        <td th:text="${sales.sales}"></td>
-        <td th:text="${sales.p_DateStr}"></td>
+    <tr th:each="salesList2 : ${salesList2}">
+        <td th:text="${salesList2.order_No}"></td>
+        <td th:text="${salesList2.mem_ID}"></td>
+        <td th:text="${salesList2.mName}"></td>
+        <td th:text="${salesList2.purchase}"></td>
+        <td th:text="${salesList2.sales}"></td>
+        <td th:text="${salesList2.p_DateStr}"></td>
     </tr>
     </tbody>
 </table>
 <li style="list-style: none;"><button onclick="location.href='/gym/menu/sales'">이전으로</button></li>
 </body>
-
 </html>

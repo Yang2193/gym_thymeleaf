@@ -44,7 +44,7 @@ public class SalesController {
     public String ResOneDaySalSel(@ModelAttribute("salesVO") SalesVO salesVO, Model model){
         SalesDAO dao = new SalesDAO();
         List<SalesVO> list = dao.oneDaySalSel(salesVO);
-        model.addAttribute("salesList", list);
+        model.addAttribute("salesList1", list);
         return "thymeleafGym/oneDaySalSelRes";
     }
     @GetMapping("/oneMonthSalSel")
@@ -57,7 +57,7 @@ public class SalesController {
     public String ResOneMonthSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
         SalesDAO dao = new SalesDAO();
         List<SalesVO> list = dao.oneMonthSalSel(salesVO);
-        model.addAttribute("salesList", list);
+        model.addAttribute("salesList2", list);
         return "thymeleafGym/oneMonthSalSelRes";
     }
     @GetMapping("/oneYearSalSel")
@@ -70,7 +70,7 @@ public class SalesController {
     public String ResOneYearSalSel(@ModelAttribute("salesVO") SalesVO salesVO,Model model){
         SalesDAO dao = new SalesDAO();
         List<SalesVO> list = dao.oneYearSalSel(salesVO);
-        model.addAttribute("salesList", list);
+        model.addAttribute("salesList3", list);
         return "thymeleafGym/oneYearSalSelRes";
     }
 

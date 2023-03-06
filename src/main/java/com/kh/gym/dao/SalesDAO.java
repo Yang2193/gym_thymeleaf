@@ -147,8 +147,8 @@ public class SalesDAO {
     public List<SalesVO> oneDaySalSel(SalesVO salesVO) {
         List<SalesVO> list = new ArrayList<>();
         try {
-            conn = Common.getConnection();
             String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY-MM-DD') = ? ORDER BY ORDER_NO";
+            conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1,salesVO.getP_DateStr());
             rs = pStmt.executeQuery();
@@ -166,7 +166,7 @@ public class SalesDAO {
             vo.setMName(name);
             vo.setPurchase(purchase);
             vo.setSales(sales);
-            vo.setP_DateStr(pDate);
+            vo.setP_DateStr((pDate));
             list.add(vo);
         }
             Common.close(rs);
@@ -181,27 +181,27 @@ public class SalesDAO {
     public List<SalesVO> oneMonthSalSel(SalesVO salesVO) {
         List<SalesVO> list = new ArrayList<>();
         try {
-            conn = Common.getConnection();
             String sql = "SELECT * FROM SALES_STATEMENT WHERE TO_CHAR(P_DATE,'YYYY-MM') = ? ORDER BY ORDER_NO";
+            conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1,salesVO.getP_DateStr());
             rs = pStmt.executeQuery();
             while (rs.next()) {
-                    int no = rs.getInt("ORDER_NO");
-                    int id = rs.getInt("MEM_ID");
-                    String name = rs.getString("MNAME");
-                    String purchase = rs.getString("PURCHASE");
-                    int sales = rs.getInt("SALES");
-                    String pDate = rs.getString("P_DATE");
+                int no = rs.getInt("ORDER_NO");
+                int id = rs.getInt("MEM_ID");
+                String name = rs.getString("MNAME");
+                String purchase = rs.getString("PURCHASE");
+                int sales = rs.getInt("SALES");
+                String pDate = rs.getString("P_DATE");
 
-                    SalesVO vo = new SalesVO();
-                    vo.setOrder_No(no);
-                    vo.setMem_ID(id);
-                    vo.setMName(name);
-                    vo.setPurchase(purchase);
-                    vo.setSales(sales);
-                    vo.setP_DateStr(pDate);
-                    list.add(vo);
+                SalesVO vo = new SalesVO();
+                vo.setOrder_No(no);
+                vo.setMem_ID(id);
+                vo.setMName(name);
+                vo.setPurchase(purchase);
+                vo.setSales(sales);
+                vo.setP_DateStr((pDate));
+                list.add(vo);
             }
             Common.close(rs);
             Common.close(pStmt);
