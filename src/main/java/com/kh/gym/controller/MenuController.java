@@ -30,4 +30,7 @@ public class MenuController {
     @GetMapping("/menu/sales")
     public String salesMenu(){return "thymeleafGym/salesMenu";}
 
+    @GetMapping("/menu/ptdata")
+    public String ptdataMenu(){return "thymeleafGym/ptDataMenu";}
+
 }
