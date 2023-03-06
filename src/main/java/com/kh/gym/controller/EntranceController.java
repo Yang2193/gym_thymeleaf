@@ -63,4 +63,17 @@ public class EntranceController {
         model.addAttribute("entranceMemberList", entranceMemberList);
         return "thymeleafGym/entranceInsertView";
     }
+
+    @GetMapping("/delete")
+    public String deleteEntranceData(){
+        return "thymeleafGym/entranceDataDelete";
+    }
+
+    @GetMapping("/deleteRst")
+    public String deleteEntranceData2(@RequestParam("mem_Id") int mem_Id, Model model){
+        dao.entranceDelete(mem_Id);
+        List<EntranceVO> entranceMemberList = dao.showMemberAttendanceList(mem_Id);
+        model.addAttribute("entranceMemberList", entranceMemberList);
+        return "thymeleafGym/entranceSelectViewId";
+    }
 }

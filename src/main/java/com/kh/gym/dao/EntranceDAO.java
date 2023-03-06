@@ -134,6 +134,21 @@ public class EntranceDAO {
         Common.close(pStmt);
         Common.close(conn);
     }
+
+    public void entranceDelete(int mem_Id){
+        String sql = "DELETE FROM ENTRANCE_DATA WHERE MEM_ID = ?";
+        try {
+            conn = Common.getConnection();
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, mem_Id);
+            pStmt.executeUpdate();
+        } catch(Exception e){
+
+        }
+        Common.close(pStmt);
+        Common.close(conn);
+    }
+
     public List<MemberEntranceVO> enterMember(int num){
         List<MemberEntranceVO> list = new ArrayList<>();
 
