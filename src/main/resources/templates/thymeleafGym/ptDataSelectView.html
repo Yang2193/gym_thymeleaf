@@ -2,13 +2,14 @@
 <html xmlns:th="http:/www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Member Information</title>
+    <title>pt_data view</title>
 </head>
 <body>
 <h2>PT 기록</h2>
 <table border="1" style="border-collapse: collapse;">
     <thead style="background-color: white; color: black;">
     <tr>
+        <th>번호</th>
         <th>회원번호</th>
         <th>회원이름</th>
         <th>트레이너</th>
@@ -19,11 +20,12 @@
     </thead>
     <tbody>
     <tr th:each="pt_data : ${pt_data}">
-        <td th:text="${pt_data.MEM_ID"></td>
-        <td th:text="${pt_data.MNAME}"></td>
-        <td th:text="${pt_data.TRAINER_NAME}"></td>
-        <td th:text="${pt_data.PT_DATE}"></td>
-        <td th:text="${pt_data.PT_REMAIN}"></td>
+        <td th:text="${pt_data.rowNo}"></td>
+        <td th:text="${pt_data.mem_ID}"></td>
+        <td th:text="${pt_data.mName}"></td>
+        <td th:text="${pt_data.tName}"></td>
+        <td th:text="${pt_data.ptDate}"></td>
+        <td th:text="${pt_data.ptRemain}"></td>
     </tr>
     </tbody>
 </table>

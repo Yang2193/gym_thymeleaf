@@ -83,7 +83,7 @@ public class PTDataDAO {
             sql.append("SELECT PT.MEM_ID, M.MNAME, T.TRAINER_NAME, TO_CHAR( PT.PT_DATE, 'YYYY-MM-DD') AS PT_DATE, PT.PT_REMAIN ");
             sql.append("FROM PT_DATA PT, MEMBERINFO M, TRAINERS T ");
             sql.append("WHERE PT.MEM_ID = M.MEM_ID AND T.TRAINER_ID = PT.TRAINER_ID AND PT.MEM_ID = ?");
-            sql.append("ORDER BY PT_DATE DESC");
+            sql.append("ORDER BY PT_REMAIN");
             pstmt = conn.prepareStatement(sql.toString());
             pstmt.setInt(1, memberID);
             listAddResultSet(list);
@@ -140,6 +140,7 @@ public class PTDataDAO {
 
         try {
             // PT_Data 테이블에 INSERT 하는 sql1
+            conn = Common.getConnection();
             StringBuilder sql1 = new StringBuilder();
             sql1.append("INSERT INTO PT_DATA(MEM_ID, TRAINER_ID, PT_DATE, PT_REMAIN) ");
             sql1.append("VALUES ( ?, ?, ?, (SELECT PT_REMAIN - 1 FROM MEMBERINFO WHERE MEM_ID = ? ))");
